@@ -1,44 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { GLOBAL } from './services/global';
-import { UserService } from './services/user.service';
-import { User } from './models/user';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+
+import { User } from '../../models/user';
+
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  providers: [UserService]
-
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
+export class LoginComponent implements OnInit {
 
-export class AppComponent implements OnInit{
-  
-  public title = 'Chérie';
-  public user: User;
-  public userRegister: User;
-  public identity;
-  public token;
-  public errorMessage;
-  public alertRegister;
-  public url: string;
+  user: User;
+  errorMessage: string;
+  identity: any;
+  token: string;
 
   constructor(
     private _userService:UserService,
     private router: Router
-  ){
+  ) {
     this.user = new User('', '', '', '', '', 'ROLE_USER', '');
-    this.userRegister = new User('', '', '', '', '', 'ROLE_USER', '');
-    this.url = GLOBAL.url;
-
   }
 
-  ngOnInit(){
-    // this.identity = this._userService.getIdentity();
-    // this.token = this._userService.getToken();
-
-    // console.log(this.identity);
-    // console.log(this.token);
-
+  ngOnInit() {
   }
 
   public onSubmit(){
@@ -72,7 +58,7 @@ export class AppComponent implements OnInit{
                 // Crear Elemento En localstorage Para Tener El Token Disponible
                 localStorage.setItem('token', JSON.stringify(token));
                 this.user = new User('', '', '', '', '', 'ROLE_USER', '');
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/dashboard/mis-datos']);
                 console.log(token);
                 console.log(identity);
       
@@ -106,43 +92,4 @@ export class AppComponent implements OnInit{
     );
   }
 
-  logout(){
-    localStorage.removeItem('identity');
-    localStorage.removeItem('token');
-    localStorage.clear();
-    this.identity = null;
-    this.token = null;
-
-  }
-
-  onSubmitRegister(){
-    console.log(this.userRegister);
-
-    this._userService.register(this.userRegister).subscribe(
-      response => {
-        let user = response.user;
-        this.userRegister = user;
-
-        if(!user._id){
-          this.alertRegister = 'Error En EL Registro';
-          
-        } else{
-          this.alertRegister = 'Registro Exitoso, Ingresa Con' + this.userRegister.email;
-          this.userRegister = new User('', '', '', '', '', 'ROLE_USER', '');
-
-        }
-      },
-
-      error => {
-        var errorMessage = <any>error;
-
-        if(errorMessage != null){
-          var body = JSON.parse(error._body);
-          this.alertRegister = body.message;
-          console.log(error);
-
-        }
-      }  
-    );
-  }
 }

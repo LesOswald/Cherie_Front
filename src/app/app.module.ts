@@ -5,17 +5,22 @@ import { HttpModule } from '@angular/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { UserEditComponent } from './components/user-edit.component';
+import { RouterModule } from '@angular/router';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserEditComponent
+    UserEditComponent,
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    routing,
     FormsModule,
-    HttpModule,
-    routing
+    HttpModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

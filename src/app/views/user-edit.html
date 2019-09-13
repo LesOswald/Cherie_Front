@@ -1,4 +1,4 @@
-<div class="col-lg-6">
+<div class="col-lg-6 col-md-9">
         <h1>{{titulo}}</h1>
 
         <div *ngIf="alertMessage"></div>
@@ -25,6 +25,15 @@
               <input type="text" #email="ngModel" name="email" [(ngModel)]="user.email" class="form-control" required />
               <span *ngIf="!email.valid && email.touched">
               </span>
+            </p>
+
+            <div class="image_for_edit" *ngIf="user.image && user.image != 'null'">
+              <img src="{{url + 'get-image-user/' + user.image}}" style="width: 50px;"/>
+            </div>
+
+            <p>
+              <label>Añade Una Foto De Perfil:</label>
+              <input type="file" placeholder="Subir Imagen..." (change)="fileChangeEvent($event)"/>
             </p>
 
         <input type="submit" value="Actualizar" class="btn btn-primary" />
