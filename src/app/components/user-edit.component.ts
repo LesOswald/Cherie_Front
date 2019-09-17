@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
+import { stringify } from 'querystring';
 
 @Component({
     selector: 'user-edit',
@@ -61,5 +62,21 @@ export class UserEditComponent implements OnInit{
             }
         );
     }
+
+    filesToUpload: Array<File>;
+
+    fileChangeEvent(fileInput:any){
+        this.filesToUpload = <Array<File>>fileInput.target.files;
+
+    }
+
+    makeFileRequest(url: string, params: Array<string>, files: Array<File>){
+         var token = this.token;
+         
+         return new Promise(function(resolve, reject){
+             
+         })
+    }
+
 }
 
