@@ -37,8 +37,8 @@ export class UserEditComponent implements OnInit{
         console.log("USUARIO INGRESADO", this.user);
         this._userService.updateUser(this.user).subscribe(
             response => {
+                console.log("TCL: UserEditComponent -> onSubmit -> response", response)
                 if(!response.user){
-                    console.log("RESPUESTA LES", response);
                     this.alertMessage = 'Error Al Actualizar El Usuario';
 
                 } else{

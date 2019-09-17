@@ -27,6 +27,15 @@
               </span>
             </p>
 
+            <div class="image_for_edit" *ngIf="user.image && user.image != null">
+              <img src="" alt="" />
+            </div>
+
+            <p>
+              <label for="">Sube Tu Foto</label>
+              <input type="file" placeholder="Subir Imagen..." />
+            </p>
+
         <input type="submit" value="Actualizar" class="btn btn-primary" />
     </form>
 </div>
