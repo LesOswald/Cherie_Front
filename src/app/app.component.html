@@ -1,7 +1,10 @@
 <div *ngIf="identity" class="navigation col-md-3">
 
-    <h1>
-      {{title}}
+    <h1 class="head-title">
+      <a [routerLink]="['/']">
+        <i class="fa fab fa-envira"></i>
+        {{title}}
+      </a>
     </h1>
     <nav id="#navigation">
         <a href="#">
@@ -22,29 +25,31 @@
     </nav>
 
     <nav id="user_logged">
+        <div class="user-image">
+          <img id="image-logged" src="{{url + 'get-image-user/' + identity.image}}" />
+        </div>
       <span>
         {{identity.name}}
-      </span>
-      <span class="btn btn-outline-secondary" (click)="logout()">
-        Cerrar Sesión
       </span>
       <a [routerLink]="['/mis-datos']">
         <span class="fa far fa-user-circle" aria-hidden="true"></span>
         Mis Datos
       </a>
+      <a (click)="logout()" class="btn-logout">
+        <i class="fas fa-sign-out-alt"></i>
+        Cerrar Sesión
+      </a>
     </nav>
 
 </div>
 
-<div class="clearfix"></div>
 
 <div *ngIf="identity" class="central col-lg-11">
-    <p>Login Exitoso</p>
     <router-outlet></router-outlet>
 
 </div>
 
-<div class="col-lg-12" *ngIf="!identity">
+<div class="col-lg-11" *ngIf="!identity">
     <div class="col-lg-6">
         <h1>Identificate</h1>
         <div *ngIf="errorMessage"></div>
