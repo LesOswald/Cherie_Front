@@ -143,4 +143,12 @@ export class AppComponent implements OnInit{
       }  
     );
   }
+
+  openSidenav(){
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  closeSidenav(){
+    document.getElementById("mySidenav").style.width = "0";
+  }
 }

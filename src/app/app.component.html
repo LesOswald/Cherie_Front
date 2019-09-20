@@ -1,52 +1,71 @@
-<div *ngIf="identity" class="navigation col-md-3">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 p-0 bg-light">
+      <div class="row pl-4">
+          <button class="btn btn-light text-dark" (click)="openSidenav()">
+            <div class="rounded-circle">
+              <i class="fa fas fa-bars"></i>
+            </div>
+          </button>
+          <div id="mySidenav" class="sidenav">
+            <div class="row m-0" id="sidenav-header">
+              <div class="col-6 avatar">
+                <div class="user-image">
+                    <img id="image-logged" src="{{url + 'get-image-user/' + identity.image}}" />
+                  </div>
+                <span>
+                  {{identity.name}}
+                </span>
+              </div>
+              <div class="col-6 p-3 m-auto" id="closeBtn">
+                <button class="btn btn-light" (click)="closeSidenav()">
+                    <i class="fa far fa-times-circle"></i>
+                </button>
+              </div>
+            </div>
+              <div class="row mx-auto">
 
-    <h1 class="head-title">
-      <a [routerLink]="['/']">
-        <i class="fa fab fa-envira"></i>
-        {{title}}
-      </a>
-    </h1>
-    <nav id="#navigation">
-        <a href="#">
-          <i class="fa fas fa-search" aria-hidden="true">
-          </i>
-          Buscar
-        </a>
-        <a href="#">
-          <i class="fa far fa-copyright" aria-hidden="true">
-          </i>
-          Marcas
-        </a>
-        <a href="#">
-          <i class="fa fas fa-magic" aria-hidden="true">
-          </i>
-          Tipos
-        </a>
-    </nav>
-
-    <nav id="user_logged">
-        <div class="user-image">
-          <img id="image-logged" src="{{url + 'get-image-user/' + identity.image}}" />
+                <nav class="navigation">
+                    
+                  <a [routerLink]="['/mis-datos']">
+                    <span class="fa far fa-user-circle" aria-hidden="true"></span>
+                    Mis Datos
+                  </a>
+                    <a [routerLink]="['/marcas', 1]">
+                      <i class="fa far fa-copyright" aria-hidden="true">
+                      </i>
+                      Marcas
+                    </a>
+                    <a href="#">
+                      <i class="fa fas fa-magic" aria-hidden="true">
+                      </i>
+                      Tipos
+                    </a>
+                    <a (click)="logout()" class="btn-logout">
+                      <i class="fas fa-sign-out-alt"></i>
+                      Salir
+                    </a>
+                </nav>
+              </div>
+          </div>
+        <div class="cherie-navbar">
+          <h1 class="head-title">
+              <a [routerLink]="['/']">
+                <i class="fa fab fa-envira"></i>
+                {{title}}
+              </a>
+            </h1>
         </div>
-      <span>
-        {{identity.name}}
-      </span>
-      <a [routerLink]="['/mis-datos']">
-        <span class="fa far fa-user-circle" aria-hidden="true"></span>
-        Mis Datos
-      </a>
-      <a (click)="logout()" class="btn-logout">
-        <i class="fas fa-sign-out-alt"></i>
-        Cerrar Sesión
-      </a>
-    </nav>
-
-</div>
-
-
-<div *ngIf="identity" class="central col-lg-11">
-    <router-outlet></router-outlet>
-
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div [class.hidden]="!identity" class="col-md-12 mt-4">
+          <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="col-lg-11" *ngIf="!identity">
