@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { GLOBAL } from '../services/global';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
-import { stringify } from 'querystring';
 
 @Component({
     selector: 'user-edit',
     templateUrl: '../views/user-edit.html',
     providers: [UserService]
-  
+    
 })
 
 export class UserEditComponent implements OnInit{
+    filesToUpload: Array<File>;
+
     public titulo: string;
     public user: User;
     public identity;
@@ -31,12 +32,10 @@ export class UserEditComponent implements OnInit{
     }
 
     ngOnInit(){
-        console.log('user-edit.component.ts Cargado');
 
     }
 
     onSubmit(){
-        console.log(this.user);
         console.log("USUARIO INGRESADO", this.user);
         this._userService.updateUser(this.user).subscribe(
             response => {
@@ -45,22 +44,23 @@ export class UserEditComponent implements OnInit{
                     this.alertMessage = 'Error Al Actualizar El Usuario';
 
                 } else{
-                    //this.user = response.user;
+                    this.user = response.user;
                     localStorage.setItem('identity', JSON.stringify(this.user));
-                    //document.getElementById("identity_name").innerHTML = this.user.name;
-
+                    document.getElementById("identity_name").innerHTML = this.user.name;
+                    
                     if(!this.filesToUpload){
                         // Redirección
-
+                        
                     } else{
-                        this.makeFileRequest(this.url+'upload-image-user/'+this.user._id, [], this.filesToUpload).then(
-                            (result: any) => {
-                                this.user.image = result.image;
-                                localStorage.setItem('identity', JSON.stringify(this.user));
-                                let image_path = this.url+'get-image-user/'+this.user.image;
-                                document.getElementById('image-logged').setAttribute('src', image_path);
+                        this.makeFileRequest(this.url+'upload-image-user/'+this.user._id, [], this.filesToUpload)
+                            .then(
+                                (result: any) => {
+                                    this.user.image = result.image;
+                                    localStorage.setItem('identity', JSON.stringify(this.user));
+                                    let image_path = this.url+'get-image-user/'+this.user.image;
+                                    document.getElementById('image-logged').setAttribute('src', image_path);
 
-                            }
+                                }
                         );
                     }
 
@@ -82,7 +82,6 @@ export class UserEditComponent implements OnInit{
         );
     }
 
-    filesToUpload: Array<File>;
 
     fileChangeEvent(fileInput:any){
         this.filesToUpload = <Array<File>>fileInput.target.files;
@@ -94,22 +93,21 @@ export class UserEditComponent implements OnInit{
          var token = this.token;
          
          return new Promise(function(resolve, reject){
-             var formData:any = new FormData();
+             var formData: FormData = new FormData();
              var xhr = new XMLHttpRequest();
-
+             
              for(var i =0; i < files.length; i++){
-                 formData.append('image', files[i], files[i].name);
-             }
-
+                formData.append('image', files[i], files[i].name);
+            }
+                
+            console.log("TCL: UserEditComponent -> makeFileRequest -> formData", formData)
+                
              xhr.onreadystatechange = function(){
-                 if(xhr.readyState == 4){
-                     if(xhr.status == 200){
-                         resolve(JSON.parse(xhr.response));
-
-                     } else{
-                         reject(xhr.response)
-                     }
-                 }
+                 if(xhr.readyState == 4 && xhr.status == 200){
+                    resolve(JSON.parse(xhr.response));
+                 } else{
+                    reject(xhr.response)
+                }
              }
 
              xhr.open('POST', url, true);

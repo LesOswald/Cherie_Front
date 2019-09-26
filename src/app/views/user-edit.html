@@ -6,7 +6,7 @@
         {{alertMessage}}
       </div>
 
-      <form #userUpdateForm="ngForm" (ngSubmit)="onSubmit()">
+      <form #userUpdateForm="ngForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
           <p>
             <label>Nombre:</label>
             <input type="text" #name="ngModel" name="name" [(ngModel)]="user.name" class="form-control" required />
@@ -37,16 +37,7 @@
             <img src="{{url + 'get-image-user/' + user.image}}" style="width: 50px;"/>
           </div>
 
-          <div class="input-group mt-4">
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-              <label class="custom-file-label" for="inputGroupFile04">Seleccionar</label>
-            </div>
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04"><span class="pr-2">Subir</span><i class="fa fas fa-upload"></i></button>
-            </div>
-          </div>
-
+            <input type="file" name="image" id="upload-photo" (change)="fileChangeEvent($event)" />
           
   </form>
         </div>

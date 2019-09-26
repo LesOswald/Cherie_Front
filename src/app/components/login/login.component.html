@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 offset-md-3 offset-lg-3">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="card-title text-center">
+            <h1>Iniciar Sesión</h1>
+          </div>
+          <div *ngIf="errorMessage" class="card-subtitle">
+            <div class="alert alert-info">
+              {{errorMessage}}
+            </div>
+          </div>
+          <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                <label>Correo Electrónico:</label>
+                <input type="email" #email="ngModel" name="email" [(ngModel)]="user.email" class="form-control" required />
+                <span *ngIf="!email.valid && email.touched">
+                  Campo Obligatorio
+                </span>
+                <label>Contraseña:</label>
+                <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" class="form-control" required />
+                <span *ngIf="!password.valid && password.touched">
+                  Campo Obligatorio
+                </span>
+            <input type="submit" value="Entrar" class="btn btn-primary" (click)="onSubmit()" />
+          </form>
+        </div>
+      </div>
+            
+    </div>
+  </div>
+</div>

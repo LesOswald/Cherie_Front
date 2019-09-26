@@ -1,4 +1,6 @@
 <div class="head-page" *ngIf="identity">
     <h1>{{titulo}}</h1>
-    
+    <button *ngIf="identity.role == 'ROLE_ADMIN'" type="button" class="btn btn-outline-secondary" id="agregarMarca">
+        Agregar Marca
+    </button>
 </div>

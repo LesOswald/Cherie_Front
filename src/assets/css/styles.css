@@ -1,8 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text&display=swap');
+
 html, body{
     margin: 0px;
     height: 100%;
     background: white;
+}
+
+* {
     font-family: 'Crimson Text', serif;
+}
+
+.letra-jumbotron{
+    color: black;
+}
+
+.actived{
+    border-bottom: 4px solid #f598e5;
+    padding-bottom: 4px;
+
+}
+
+#inicio{
+    color: #f598e5;
+    background-color: white;
+    border-color: #f598e5;
+
+}
+
+#tituloInicio{
+    color: white;
+    background-color: #f598e5;
+    border-color: #f598e5;
+    text-align: center;
+    width: 20%;
+    height: 50px;
+    margin: auto;
+    padding: 10px 0px;
+    border-radius: 1rem;
+
+}
+
+#leadText{
+    color: #3d5c5c;
+}
+
+#text{
+    color: #3d5c5c;
+}
+
+#camera {
+    color: #f598e5;
+}
+
+#contenido {
+    color: #f598e5;
+}
+
+#recorrido {
+    color: #f598e5;
+    border-color: #f598e5;
+}
+
+#recorrido:hover {
+    color: white;
+    background-color: #f598e5 !important;
+    border-color: #f598e5;
+}
+
+#agregarMarca{
+    color: #e612c1;
+    border-color: #e612c1;
+}
+
+#agregarMarca:hover{
+    color: white;
+    background-color: #f598e5;
+    border-color: #f598e5;
 }
 
 .head-title{
@@ -41,7 +114,7 @@ html, body{
 }
 
 .cherie-navbar a{
-    color: #e612c1;
+    color: #f598e5;
     display: block;
     text-decoration: none;
     height: 100%;
@@ -52,7 +125,15 @@ html, body{
     margin-left: 15px;
 }
 
+#bannerHome {
+    background-image: url('../../assets/Images/CherieB.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
+#bannerHome > div > div {
+    background-color: white;
+}
 
 .avatar .user-image{
     background: #f598e5;

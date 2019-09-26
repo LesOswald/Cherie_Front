@@ -2,25 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { routing, appRoutingProviders } from './app.routing';
-import { AppComponent } from './app.component';
-import { UserEditComponent } from './components/user-edit.component';
-import { MarcaListComponent } from './components/marca-list.component';
 
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UserEditComponent,
-    MarcaListComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
-    HttpModule,
-    routing
+    HttpModule
   ],
-  providers: [appRoutingProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
